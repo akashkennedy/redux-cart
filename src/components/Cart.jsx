@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { removeFromCart } from "../store/cartSlice";
+import { removeFromCart, clearCart } from "../store/cartSlice";
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart.cart);
@@ -23,6 +23,12 @@ const Cart = () => {
           ))
         )}
       </div>
+      <button
+        onClick={() => dispatch(clearCart())}
+        disabled={cart.length === 0}
+      >
+        Clear Cart
+      </button>
     </div>
   );
 };
