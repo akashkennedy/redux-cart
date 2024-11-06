@@ -7,7 +7,6 @@ const ProductList = () => {
     { id: 2, name: "product2", price: 17 },
   ];
   const dispatch = useDispatch();
-
   return (
     <div>
       <h1>Products</h1>
