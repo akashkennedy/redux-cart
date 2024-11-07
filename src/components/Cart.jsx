@@ -25,7 +25,7 @@ const Cart = () => {
         ) : (
           cart.map((product) => (
             <div key={product.id}>
-              <p>{product.name}</p>
+              <p>{product.title}</p>
               <p>{product.price}</p>
               <button onClick={() => dispatch(incrementQuantity(product.id))}>
                 +

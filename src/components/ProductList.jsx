@@ -1,25 +1,35 @@
 import { addToCart } from "../store/cartSlice";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setProducts } from "../store/productSlice";
+import { useEffect } from "react";
 
 const ProductList = () => {
-  const products = [
-    { id: 1, name: "product1", price: 10 },
-    { id: 2, name: "product2", price: 17 },
-  ];
+  const products = useSelector((state) => state.products.products);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    fetch("https://fakestoreapi.com/products")
+      .then((res) => res.json())
+      .then((data) => dispatch(setProducts(data)));
+  }, [dispatch]);
+
   return (
     <div>
       <h1>Products</h1>
       <div>
-        {products.map((product) => (
-          <div key={product.id}>
-            <h2>{product.name}</h2>
-            <p>$: {product.price}</p>
-            <button onClick={() => dispatch(addToCart(product))}>
-              Add To Cart
-            </button>
-          </div>
-        ))}
+        {products.length === 0 ? (
+          <h3>Loading Products</h3>
+        ) : (
+          products.map((product) => (
+            <div key={product.id}>
+              <h2>{product.title}</h2>
+              <p>$: {product.price}</p>
+              <button onClick={() => dispatch(addToCart(product))}>
+                Add To Cart
+              </button>
+            </div>
+          ))
+        )}
       </div>
     </div>
   );
