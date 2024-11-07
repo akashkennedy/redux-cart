@@ -17,16 +17,17 @@ const Cart = () => {
   );
 
   return (
-    <div>
+    <div className="cart">
       <h2>Cart</h2>
       <div>
         {cart.length === 0 ? (
           <h2>Your Cart is Empty</h2>
         ) : (
           cart.map((product) => (
-            <div key={product.id}>
-              <p>{product.title}</p>
-              <p>{product.price}</p>
+            <div className="cart-item" key={product.id}>
+              <p>
+                {product.title} - ${product.price} x {product.quantity}
+              </p>
               <button onClick={() => dispatch(incrementQuantity(product.id))}>
                 +
               </button>
@@ -40,13 +41,14 @@ const Cart = () => {
           ))
         )}
       </div>
+      <p className="total-price">Total Price: $ {totalPrice.toFixed(2)}</p>
       <button
+        className="clear-cart-button"
         onClick={() => dispatch(clearCart())}
         disabled={cart.length === 0}
       >
         Clear Cart
       </button>
-      <p>Total Price: $ {totalPrice}</p>
     </div>
   );
 };

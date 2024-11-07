@@ -14,23 +14,20 @@ const ProductList = () => {
   }, [dispatch]);
 
   return (
-    <div>
-      <h1>Products</h1>
-      <div>
-        {products.length === 0 ? (
-          <h3>Loading Products</h3>
-        ) : (
-          products.map((product) => (
-            <div key={product.id}>
-              <h2>{product.title}</h2>
-              <p>$: {product.price}</p>
-              <button onClick={() => dispatch(addToCart(product))}>
-                Add To Cart
-              </button>
-            </div>
-          ))
-        )}
-      </div>
+    <div className="product-list">
+      {products.length === 0 ? (
+        <h3>Loading Products</h3>
+      ) : (
+        products.map((product) => (
+          <div className="product-card" key={product.id}>
+            <h2>{product.title}</h2>
+            <p>$: {product.price}</p>
+            <button onClick={() => dispatch(addToCart(product))}>
+              Add To Cart
+            </button>
+          </div>
+        ))
+      )}
     </div>
   );
 };
